@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmAssistant AI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .readonly-textarea {
+            opacity: 0.6;
+        }
+
+        .highlight-control {
+            background-color: #e0e0e0;
+        }
+        
+        .assistant-col {
+            border-left: 2px solid #dee2e6;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-3">Screenwriting AI</h2>
+    <div class="row">
+        <!-- Existing Form Column -->
+        <div class="col-md-8">
+            <form name action="/" method="post">
+                <div class="form-group">
+                    <button type="button" class="btn btn-warning mb-3" onclick="clearAllFields()">Clear All Fields</button>
+                </div>
+                <div class="form-group">
+                    <label for="preserve_input">Preserve Input:</label>
+                    <input type="checkbox" id="preserve_input" name="preserve_input" value="true" checked>
+                </div>
+                {% for segment in ['M', 'T', 'CQ', 'G', 'SUM', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6','S7','S8','S9'] %}
+                <div class="form-group">
+                    <label for="{{ segment }}">{{ segment }}:</label>
+                    <textarea class="form-control {% if enter_detail_control %}readonly-textarea{% endif %}" rows="5" id="{{ segment }}" name="{{ segment }}" {% if enter_detail_control %}readonly{% endif %}>{{ outputs[segment] }}</textarea>
+                    <button type="button" class="btn btn-warning" onclick="clearField('{{ segment }}')">Clear</button>
+                    {% if segment.startswith('SUM') %}
+                    <button type="submit" name ="generate_summary">Generate Summary </button>
+                    <br>
+                    <label for="{{ segment }}_detail">Detail Level:</label>
+                    <input type="range" name="{{ segment }}_detail" id="{{ segment }}_detail" class="form-control-range highlight-control" min="1" max="3" value="{{ details[segment] }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+                
+                {% if not enter_detail_control %}
+                    <button type="submit" class="btn btn-primary" name="generate_story">Generate Story</button>
+                    <button type="submit" class="btn btn-secondary" name="enter_detail_control">Enter Detail Control Mode</button>
+                {% else %}
+                    <button type="submit" class="btn btn-primary" name="submit_detail_adjustments">Submit Detail Adjustments</button>
+                    <button type="submit" class="btn btn-secondary" name="exit_detail_control">Exit Detail Control Mode</button>
+                {% endif %}
+                
+                
+                           <!-- GPT-4 Assistant Column -->
+                <div class="form-group">
+                <h4>GPT-4 Assistant</h4>
+                <textarea name="gpt4_output" class="form-control" rows="15" >{{ gpt4_output }}</textarea>
+                <button type="submit" class="btn btn-primary" name="send_intern">Send Request</button>
+                </div>
+                
+            </form>
+        </div>
+    
+      
+
+     
+    </div>
+</div>
+
+<script>
+   
+    function clearField(segmentId) {
+        document.getElementById(segmentId).value = '';
+    }
+
+    function clearAllFields() {
+        {% for segment in ['M', 'T', 'CQ', 'G', 'SUM', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6','S7','S8','S9'] %}
+            document.getElementById('{{ segment }}').value = '';
+        {% endfor %}
+    }
+   
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
