@@ -9,7 +9,7 @@ app.secret_key = "your_secret_key1"  # Replace with your strong secret key
 OPENAI_API_KEY = "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"
 BASE_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8qt8P4td"
 DETAIL_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8RSuexIL"
-SUMMARY_MODEL = "ft:gpt-3.5-turbo-0125:filmassistantai:supp-sum:8yOMaxyc"
+SUMMARY_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8qt8P4td"
 API_URL = "https://api.openai.com/v1/chat/completions"
 
 segments = ['M', 'T', 'CQ', 'G', 'S', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9']
@@ -90,7 +90,7 @@ def index():
             # Construct messages for summary model
             supplementary_fields = ['M', 'T', 'G', 'CQ']
             summary_input = "\n".join([f"{seg}: {user_inputs[seg]}" for seg in supplementary_fields if user_inputs[seg]])
-            messages.append({"role": "system", "content": "You are a storytelling AI. Create a cohesive, 3 sentence original story summary based on the provided supplementary fields. Mention at least one specific character and structure the output as follows: 'SUM: (Summary)'."})
+            messages.append({"role": "system", "content": "You are a storytelling AI. Create a cohesive, original, 3 sentence grounded story summary. If there are any user inputs provided, incorporate those as well. Mention at least one specific character. Mention at least one specific character and structure the output as follows: 'SUM: (Summary)'."})
             messages.append({"role": "user", "content": summary_input})
             
             print("Messages sent to the model:", messages)
