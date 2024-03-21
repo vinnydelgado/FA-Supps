@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmAssistant AI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .header-logo {
+            height: 40px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-3">
+            <img src="Fa logo Draft 1.png" alt="FilmAssistant AI Logo" class="header-logo">
+            filmassistant.io
+        </h2>
+        <div class="row">
+            <div class="col-md-12">
+                <form name action="/" method="post">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-warning mb-3" onclick="clearAllFields()">Clear All Fields</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="G">G:</label>
+                                <textarea class="form-control" rows="3" id="G" name="G">{{ outputs['G'] }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="T">T:</label>
+                                <textarea class="form-control" rows="3" id="T" name="T">{{ outputs['T'] }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="M">M:</label>
+                                <textarea class="form-control" rows="3" id="M" name="M">{{ outputs['M'] }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="CQ">CM:</label>
+                                <textarea class="form-control" rows="3" id="CQ" name="CQ">{{ outputs['CQ'] }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="SUM">SUM:</label>
+                        <textarea class="form-control" rows="3" id="SUM" name="SUM">{{ outputs['SUM'] }}</textarea>
+                        <button type="submit" name="generate_summary">Generate Summary</button>
+                    </div>
+                    {% for i in range(1, 10) %}
+                    <div class="form-group">
+                        <label for="S{{ i }}">S{{ i }}:</label>
+                        <textarea class="form-control" rows="2" id="S{{ i }}" name="S{{ i }}">{{ outputs['S' ~ i] }}</textarea>
+                        <button type="button" class="btn btn-warning" onclick="clearField('S{{ i }}')">Clear</button>
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary" name="generate_story">Generate Story</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearField(segmentId) {
+            document.getElementById(segmentId).value = '';
+        }
+
+        function clearAllFields() {
+            var segments = ['G', 'T', 'M', 'CQ', 'SUM', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'];
+            segments.forEach(function(segment) {
+                document.getElementById(segment).value = '';
+            });
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
