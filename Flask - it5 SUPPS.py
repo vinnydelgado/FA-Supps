@@ -9,7 +9,7 @@ app.secret_key = "your_secret_key1"  # Replace with your strong secret key
 OPENAI_API_KEY = "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"
 BASE_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8qt8P4td"
 DETAIL_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8RSuexIL"
-SUMMARY_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8qt8P4td"
+SUMMARY_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::98rv64Ql"
 API_URL = "https://api.openai.com/v1/chat/completions"
 
 segments = ['M', 'T', 'CQ', 'G', 'S', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9']
