@@ -6,10 +6,10 @@ from operator import is_not
 app = Flask(__name__)
 app.secret_key = "your_secret_key1"  # Replace with your strong secret key
 
-OPENAI_API_KEY = "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"
-BASE_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8qt8P4td"
+OPENAI_API_KEY = "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"
+BASE_MODEL = "ft:gpt-3.5-turbo-0125:filmassistantai::99LrEYbM"
 DETAIL_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::8RSuexIL"
-SUMMARY_MODEL = "ft:gpt-3.5-turbo-1106:filmassistantai::98rv64Ql"
+SUMMARY_MODEL = "ft:gpt-3.5-turbo-0125:filmassistantai::9AnJE7tZ"
 API_URL = "https://api.openai.com/v1/chat/completions"
 
 segments = ['M', 'T', 'CQ', 'G', 'S', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9']
